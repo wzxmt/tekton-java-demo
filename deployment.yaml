@@ -15,8 +15,10 @@ spec:
       labels:
         app: "tekton-test"
     spec:
+      imagePullSecrets:
+      - name: docker-registry
       containers:
-        - image: "addozhang/tekton-test:latest"
+        - image: registry.wzxmt.com/tekton-java-demo:latest
           imagePullPolicy: "Always"
           livenessProbe:
             failureThreshold: 3
@@ -47,7 +49,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: tekton-test
   name: tekton-test
@@ -60,4 +61,4 @@ spec:
     nodePort: 30080
   selector:
     app: tekton-test
-  type: NodePort            
+  type: NodePort
