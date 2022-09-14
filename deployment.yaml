@@ -58,7 +58,22 @@ spec:
   - port: 8080
     protocol: TCP
     targetPort: 8080
-    nodePort: 30080
   selector:
     app: PROJECT
-  type: NodePort
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: PROJECT
+  namespace: default
+  labels:
+    app: PROJECT
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`test.wzxmt.com`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: PROJECT
+      port: 9097
