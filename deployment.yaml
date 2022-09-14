@@ -76,4 +76,4 @@ spec:
     kind: Rule
     services:
     - name: PROJECT
-      port: 9097
+      port: 8080
